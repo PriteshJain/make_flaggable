@@ -6,7 +6,7 @@ class CreateMakeFlaggableTables < ActiveRecord::Migration
        t.string   :flagger_type
        t.integer  :flagger_id
        t.string   :flag
-
+       t.string   :message , :limit=> 500
        t.timestamps
     end
 
