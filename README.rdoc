@@ -5,13 +5,14 @@
 MakeFlaggable is an extension for building a user-centric flagging system for Rails 3 applications.
 It currently supports ActiveRecord models.
 
-Special thanks to medihack[https://github.com/medihack/make_flaggable] for providing this awesome gem!
+Special thanks to medihack[https://github.com/medihack/make_flaggable] for providing this awesome gem! and 
+cavneb[git://github.com/cavneb/make_flaggable.git] for porting it to rails 3.2
 
 == Installation
 
 add MakeFlaggable to your Gemfile
 
-  gem 'make_flaggable', :git => 'git://github.com/cavneb/make_flaggable.git'
+  gem 'make_flaggable', :git => 'git://github.com/PriteshJain/make_flaggable.git'
 
 afterwards execute
 
@@ -38,12 +39,23 @@ migrate the database
   end
 
   # The user can now flag the flaggable.
+  # Method signature 
+  # flagger.flag!(flaggable,flag_name,message=nil)
+
+  # Usage
+
   # If the user already flagged the flaggable with the :flag_name then an AlreadyFlaggedError is raised.
   user.flag!(article, :flag_name)
+
+  # Add a custom mesaage with the flag! for more verbose details
+  user.flag!(article, :flag_name,'why was this object flaggged')
 
   # The method without bang(!) does not raise the AlreadyFlaggedError when the user flags the flaggable more than once.
   # Instead it just returns false and ignores the flagging.
   user.flag(article, :flag_name)
+
+  # Add a custom mesaage with the flag for more verbose details
+  user.flag(article, :flag_name,'why was this object flaggged')
 
   # The user may unflag an already done flagging.
   # If the user never flagged the flaggable then an NotFlaggedError is raised.
