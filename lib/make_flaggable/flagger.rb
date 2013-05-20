@@ -16,20 +16,22 @@ module MakeFlaggable
     # Raises an +AlreadyFlaggedError+ if the flagger already flagged the flaggable with the same +:flag+.
     # Raises an +InvalidFlaggableError+ if the flaggable is not a valid flaggable.
     # Raises an +InvalidFlagError+ if the flaggable does not allow the provided +:flag+ as a flag value.
-    def flag!(flaggable, flag)
+    # Added a useful message for the flag raised defaults to nil
+
+    def flag!(flaggable, flag,message=nil)
       check_flaggable(flaggable, flag)
 
       if flagged?(flaggable, flag)
         raise MakeFlaggable::Exceptions::AlreadyFlaggedError.new
       end
 
-      Flagging.create(:flaggable => flaggable, :flagger => self, :flag => flag)
+      Flagging.create(:flaggable => flaggable, :flagger => self, :flag => flag, :message => message)
     end
 
     # Flag the +flaggable+, but don't raise an error if the flaggable was already flagged by the +flagger+ with the +:flag+.
-    def flag(flaggable, flag)
+    def flag(flaggable, flag,message=nil)
       begin
-        flag!(flaggable, flag)
+        flag!(flaggable, flag,message)
       rescue Exceptions::AlreadyFlaggedError
       end
     end
