@@ -5,6 +5,7 @@ describe Flagging do
     it { should allow_mass_assignment_of(:flaggable) }
     it { should allow_mass_assignment_of(:flagger) }
     it { should allow_mass_assignment_of(:flag) }
+    it { should allow_mass_assignment_of(:message) }
   end
 end
 

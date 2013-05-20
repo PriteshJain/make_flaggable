@@ -27,15 +27,15 @@ describe "Make Flaggable" do
 
   it "should have flaggings by flag name" do
     @flagger.flag!(@flaggable, :inappropriate)
-    @flagger.flag!(@flaggable, :favorite)
+    @flagger.flag!(@flaggable, :favorite,'message')
     @flagger.flaggings.reload.length.should == 2
     @flagger.flaggings.with_flag(:favorite).length.should == 1
   end
 
   it "should have flaggings by flaggable" do
-    @flagger.flag!(@flaggable, :inappropriate)
+    @flagger.flag!(@flaggable, :inappropriate,'message')
     @flagger.flag!(@flaggable, :favorite)
-    @flagger.flag!(@flaggable2, :favorite)
+    @flagger.flag!(@flaggable2, :favorite,'message')
     @flagger.flaggings.reload.length.should == 3
     @flagger.flaggings.with_flaggable(@flaggable).length.should == 2
     @flagger.flaggings.with_flaggable(@flaggable2).length.should == 1

@@ -1,5 +1,5 @@
 class Flagging < ActiveRecord::Base
-  attr_accessible :flaggable, :flagger, :flag
+  attr_accessible :flaggable, :flagger, :flag, :message
 end
 
 class FlaggableModel < ActiveRecord::Base
